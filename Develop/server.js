@@ -5,7 +5,6 @@ const PORT = 3000;
 
 
 app.use(express.static('public'))
-app.use(express.static('db'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -32,7 +31,7 @@ app.delete("/api/notes/:id", function( req, res ){
     notes = notes.filter( note => note.id != noteID )
     fs.writeFileSync( './db/db.json', JSON.stringify(notes) )
     res.send( notes );
-    console
+    console.log('delete works')
     
 })
 
