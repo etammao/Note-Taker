@@ -27,6 +27,8 @@ app.post( "/api/notes", function( req, res ){
 
 
 app.delete("/api/notes/:id", function( req, res ){
+    const noteID = req.params.id
+    notes = notes.filter( note => note.id != noteID )
     fs.writeFileSync( './db/db.json', JSON.stringify(notes) )
     res.send( notes )
     
