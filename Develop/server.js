@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-const notes = []
+let notes = []
 
 app.get('/api/notes',function(req,res){
     console.log('appGet works')
@@ -20,6 +20,7 @@ app.get('/api/notes',function(req,res){
 
 app.post( "/api/notes", function( req, res ){
     const newNotes=req.body;
+    newNotes.id = Date.now()
     notes.push(newNotes);
     fs.writeFileSync('./db/db.json', JSON.stringify(notes))
     res.send(notes)
@@ -30,7 +31,8 @@ app.delete("/api/notes/:id", function( req, res ){
     const noteID = req.params.id
     notes = notes.filter( note => note.id != noteID )
     fs.writeFileSync( './db/db.json', JSON.stringify(notes) )
-    res.send( notes )
+    res.send( notes );
+    console
     
 })
 
